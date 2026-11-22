@@ -35,3 +35,5 @@ next-env.d.ts
 
 # temp files
 processed_assets/
+
+.vercel
