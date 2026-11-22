@@ -26,7 +26,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mecforge.vercel.app"),
+  metadataBase: new URL("https://mecforge-industrial.vercel.app"),
   title: {
     default: `${siteConfig.name} | Precision Aluminium Piston Manufacturer India`,
     template: `%s | ${siteConfig.name}`,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "Custom Piston Manufacturer",
     "Industrial Engine Pistons",
     "Krishna Industries Rajkot",
-    "MECFORGE Pistons",
+    "Jeet MECFORGE",
     "Piston Gravity Die Casting India",
     "Piston Export Manufacturer",
   ],
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mecforge.vercel.app",
+    url: "https://mecforge-industrial.vercel.app",
     siteName: siteConfig.name,
     title: `${siteConfig.name} | Precision Aluminium Piston Manufacturer`,
     description: siteConfig.subtitle,
@@ -97,7 +97,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="bg-forged-bg text-aluminium-100 flex flex-col min-h-screen">
+      <body className="text-brand-slate flex flex-col min-h-screen">
         <SmoothScroll>
           <Navbar />
           <main className="flex-1">{children}</main>

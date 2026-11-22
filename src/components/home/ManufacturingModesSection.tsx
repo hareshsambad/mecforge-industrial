@@ -54,20 +54,17 @@ export function ManufacturingModesSection() {
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-forged-surface border-y border-forged-border relative overflow-hidden">
-      {/* Background blueprint grid */}
-      <div className="absolute inset-0 bg-blueprint-grid opacity-30 pointer-events-none" />
-
+    <section className="py-16 lg:py-24 relative overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3">
-          <span className="text-xs font-mono uppercase tracking-widest text-electric font-semibold">
+        <div className="max-w-3xl mb-14 space-y-3">
+          <span className="text-xs font-mono uppercase tracking-widest text-blue-600 font-semibold">
             FLEXIBLE B2B MANUFACTURING MODES
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-heading tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy font-heading tracking-tight">
             Engineered the Way You Need It.
           </h2>
-          <p className="text-base text-aluminium-300">
+          <p className="text-base text-slate-600">
             Whether replenishing high-volume standard models or bringing a new custom engine 
             specification into production, MECFORGE offers three adaptable engagement models.
           </p>
@@ -80,49 +77,49 @@ export function ManufacturingModesSection() {
             return (
               <div
                 key={idx}
-                className={`relative rounded-2xl flex flex-col justify-between p-8 transition-all duration-300 ${
+                className={`relative rounded-3xl flex flex-col justify-between p-8 transition-all duration-300 shadow-soft-card hover:shadow-hover-card ${
                   mode.highlight
-                    ? "bg-gradient-to-b from-forged-card to-forged-surface border-2 border-electric/40 shadow-glow-blue/20"
-                    : "bg-forged-card/80 border border-forged-border/80 hover:border-aluminium-400/40"
+                    ? "bg-gradient-to-b from-white to-blue-50/50 border-2 border-blue-500/70"
+                    : "bg-white border border-slate-200/90 hover:border-blue-300"
                 }`}
               >
                 <div className="space-y-6">
                   {/* Top Header */}
                   <div className="flex items-center justify-between">
-                    <span className="text-3xl font-extrabold font-mono text-electric">
+                    <span className="text-3xl font-black font-mono text-blue-600">
                       {mode.num}
                     </span>
-                    <div className="p-3 rounded-xl bg-forged-surface border border-white/5 text-electric">
+                    <div className="p-3 rounded-2xl bg-blue-50 text-blue-600 border border-blue-100">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
                   {/* Title & Tagline */}
                   <div>
-                    <h3 className="text-2xl font-bold text-white font-heading">
+                    <h3 className="text-2xl font-bold text-brand-navy font-heading">
                       {mode.title}
                     </h3>
-                    <p className="text-xs font-mono text-electric mt-1">
+                    <p className="text-xs font-mono text-blue-600 font-semibold mt-1">
                       {mode.tagline}
                     </p>
                   </div>
 
-                  {/* If drawing-based, show the glowing CAD blueprint! */}
+                  {/* CAD blueprint graphic */}
                   {mode.image && (
-                    <div className="relative rounded-xl overflow-hidden border border-electric/30 aspect-[16/10] bg-[#0A192F]">
+                    <div className="relative rounded-2xl overflow-hidden border border-blue-200 aspect-[16/10] bg-[#0A192F] shadow-sm">
                       <Image
                         src={mode.image}
                         alt="2D CAD Technical Blueprint of Piston"
                         fill
                         className="object-contain p-2 hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-forged-bg/80 text-[10px] font-mono text-electric border border-electric/20">
+                      <div className="absolute bottom-2 right-2 px-2.5 py-1 rounded-md bg-slate-900/85 text-[10px] font-mono text-sky-300 border border-sky-400/30">
                         2D CAD Blueprint
                       </div>
                     </div>
                   )}
 
-                  <p className="text-sm text-aluminium-300 leading-relaxed">
+                  <p className="text-sm text-slate-600 leading-relaxed">
                     {mode.desc}
                   </p>
 
@@ -131,23 +128,23 @@ export function ManufacturingModesSection() {
                     {mode.features.map((feat, fIdx) => (
                       <li
                         key={fIdx}
-                        className="flex items-start gap-2.5 text-xs text-aluminium-300"
+                        className="flex items-start gap-2.5 text-xs text-slate-700 font-medium"
                       >
-                        <CheckCircle className="w-4 h-4 text-electric shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Bottom CTA Link */}
-                <div className="pt-8 mt-6 border-t border-forged-border">
+                {/* Bottom CTA Button */}
+                <div className="pt-8 mt-6 border-t border-slate-100">
                   <Link
                     href={mode.ctaHref}
                     className={`inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
                       mode.highlight
-                        ? "bg-electric hover:bg-electric-hover text-white shadow-glow-blue"
-                        : "bg-forged-surface hover:bg-forged-elevated text-aluminium-200 border border-forged-border"
+                        ? "bg-blue-600 hover:bg-blue-700 text-white shadow-btn-blue"
+                        : "bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200"
                     }`}
                   >
                     <span>{mode.ctaText}</span>

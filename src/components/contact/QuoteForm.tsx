@@ -10,8 +10,8 @@ import {
   FileCheck,
   AlertCircle,
   Loader2,
-  Sparkles,
 } from "lucide-react";
+import { siteConfig } from "@/data/siteConfig";
 
 export function QuoteForm() {
   const searchParams = useSearchParams();
@@ -57,7 +57,6 @@ export function QuoteForm() {
     const selected = e.target.files?.[0];
     if (!selected) return;
 
-    // Check size <= 10MB
     if (selected.size > 10 * 1024 * 1024) {
       setFileError("File size exceeds 10MB limit. Please upload a smaller file.");
       setFile(null);
@@ -74,7 +73,6 @@ export function QuoteForm() {
     setError(null);
 
     try {
-      // Post to internal API route
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -93,19 +91,18 @@ export function QuoteForm() {
 
       setSuccess(true);
 
-      // Trigger celebration confetti
       try {
         confetti({
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ["#0EA5E9", "#38BDF8", "#E2E8F0"],
+          colors: ["#2563EB", "#10B981", "#38BDF8"],
         });
       } catch (err) {
-        // Confetti is optional progressive enhancement
+        // Confetti is optional
       }
     } catch (err: any) {
-      setError(err.message || "An error occurred. Please try again or WhatsApp us directly.");
+      setError(err.message || "An error occurred. Please try again or WhatsApp Jeet directly.");
     } finally {
       setSubmitting(false);
     }
@@ -113,23 +110,23 @@ export function QuoteForm() {
 
   if (success) {
     return (
-      <div className="rounded-2xl bg-forged-card border border-emerald-500/40 p-8 sm:p-10 text-center space-y-6 shadow-2xl">
-        <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center">
+      <div className="rounded-3xl bg-white border border-emerald-300 p-8 sm:p-10 text-center space-y-6 shadow-soft-card">
+        <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center">
           <CheckCircle2 className="w-10 h-10" />
         </div>
         <div className="space-y-2">
-          <h3 className="text-2xl font-bold text-white font-heading">
+          <h3 className="text-2xl font-bold text-brand-navy font-heading">
             Quotation Request Received!
           </h3>
-          <p className="text-sm text-aluminium-300 max-w-md mx-auto leading-relaxed">
-            Thank you, <strong className="text-white">{formData.name}</strong>. Our 
-            engineering and production team will review your specifications
+          <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+            Thank you, <strong className="text-slate-900">{formData.name}</strong>. Jeet and our 
+            production engineering team will review your specifications
             {formData.modelCode ? ` for model ${formData.modelCode}` : ""} and send 
             a comprehensive bulk quotation within 24 business hours.
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-forged-surface border border-forged-border text-xs text-aluminium-400 font-mono max-w-md mx-auto">
+        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 font-mono max-w-md mx-auto">
           Reference: MECFORGE-{Math.floor(100000 + Math.random() * 900000)} • Origin: India
         </div>
 
@@ -152,7 +149,7 @@ export function QuoteForm() {
             setFile(null);
           }}
           type="button"
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-aluminium-200 bg-forged-surface hover:bg-forged-elevated border border-forged-border transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors"
         >
           <span>Submit Another Enquiry</span>
         </button>
@@ -163,23 +160,23 @@ export function QuoteForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl bg-forged-card border border-forged-border/90 p-6 sm:p-8 space-y-6 shadow-2xl relative"
+      className="rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-8 space-y-6 shadow-soft-card relative"
     >
-      <div className="border-b border-forged-border pb-4">
+      <div className="border-b border-slate-100 pb-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl sm:text-2xl font-bold text-white font-heading">
+          <h3 className="text-xl sm:text-2xl font-bold text-brand-navy font-heading">
             Request a Bulk Quotation
           </h3>
-          <span className="text-xs font-mono text-electric">B2B Direct</span>
+          <span className="text-xs font-mono text-blue-600 font-semibold">B2B Direct</span>
         </div>
-        <p className="text-xs text-aluminium-400 mt-1">
-          Share your drawings, reference piston specs, or required quantities.
+        <p className="text-xs text-slate-500 mt-1">
+          Share your drawings, reference piston specs, or required quantities directly with Jeet.
         </p>
       </div>
 
       {error && (
-        <div className="p-3.5 rounded-xl bg-red-950/40 border border-red-500/40 flex items-center gap-3 text-xs text-red-200">
-          <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+        <div className="p-3.5 rounded-2xl bg-red-50 border border-red-200 flex items-center gap-3 text-xs text-red-700">
+          <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
           <span>{error}</span>
         </div>
       )}
@@ -187,8 +184,8 @@ export function QuoteForm() {
       {/* Row 1: Name & Company */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
-            Buyer Name <span className="text-electric">*</span>
+          <label className="text-xs font-mono text-slate-700 font-medium block">
+            Buyer Name <span className="text-blue-600">*</span>
           </label>
           <input
             type="text"
@@ -196,13 +193,13 @@ export function QuoteForm() {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="e.g. John Doe / Rajesh Patel"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
-            Company Name <span className="text-electric">*</span>
+          <label className="text-xs font-mono text-slate-700 font-medium block">
+            Company Name <span className="text-blue-600">*</span>
           </label>
           <input
             type="text"
@@ -210,7 +207,7 @@ export function QuoteForm() {
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             placeholder="e.g. Atlas Auto Spares Ltd."
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
       </div>
@@ -218,8 +215,8 @@ export function QuoteForm() {
       {/* Row 2: Country, Email, Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
-            Country <span className="text-electric">*</span>
+          <label className="text-xs font-mono text-slate-700 font-medium block">
+            Country <span className="text-blue-600">*</span>
           </label>
           <input
             type="text"
@@ -227,13 +224,13 @@ export function QuoteForm() {
             value={formData.country}
             onChange={(e) => setFormData({ ...formData, country: e.target.value })}
             placeholder="e.g. UAE / Germany / USA"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
-            Business Email <span className="text-electric">*</span>
+          <label className="text-xs font-mono text-slate-700 font-medium block">
+            Business Email <span className="text-blue-600">*</span>
           </label>
           <input
             type="email"
@@ -241,13 +238,13 @@ export function QuoteForm() {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="buyer@company.com"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
-            Phone / WhatsApp <span className="text-electric">*</span>
+          <label className="text-xs font-mono text-slate-700 font-medium block">
+            Phone / WhatsApp <span className="text-blue-600">*</span>
           </label>
           <input
             type="tel"
@@ -255,7 +252,7 @@ export function QuoteForm() {
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+1 555-019-2834"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
       </div>
@@ -263,13 +260,13 @@ export function QuoteForm() {
       {/* Row 3: Piston Type & Model Code */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
-            Required Piston Category <span className="text-electric">*</span>
+          <label className="text-xs font-mono text-slate-700 font-medium block">
+            Required Piston Category <span className="text-blue-600">*</span>
           </label>
           <select
             value={formData.pistonType}
             onChange={(e) => setFormData({ ...formData, pistonType: e.target.value })}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           >
             <option value="Diesel Engine Piston">Diesel Engine Piston</option>
             <option value="Oil Engine Piston">Oil Engine Piston</option>
@@ -279,7 +276,7 @@ export function QuoteForm() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
+          <label className="text-xs font-mono text-slate-700 font-medium block">
             Catalogue Model Code (if applicable)
           </label>
           <input
@@ -287,7 +284,7 @@ export function QuoteForm() {
             value={formData.modelCode}
             onChange={(e) => setFormData({ ...formData, modelCode: e.target.value })}
             placeholder="e.g. MF-D101 or Custom"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
       </div>
@@ -295,7 +292,7 @@ export function QuoteForm() {
       {/* Row 4: Engine Make, Diameter, Quantity */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
+          <label className="text-xs font-mono text-slate-700 font-medium block">
             Engine Make / Model (Optional)
           </label>
           <input
@@ -303,12 +300,12 @@ export function QuoteForm() {
             value={formData.engineMake}
             onChange={(e) => setFormData({ ...formData, engineMake: e.target.value })}
             placeholder="e.g. Cummins / Perkins / Yanmar"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
+          <label className="text-xs font-mono text-slate-700 font-medium block">
             Piston Diameter (mm) (Optional)
           </label>
           <input
@@ -316,13 +313,13 @@ export function QuoteForm() {
             value={formData.diameterMm}
             onChange={(e) => setFormData({ ...formData, diameterMm: e.target.value })}
             placeholder="e.g. 102.00 mm"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-aluminium-300 block">
-            Required Quantity <span className="text-electric">*</span>
+          <label className="text-xs font-mono text-slate-700 font-medium block">
+            Required Quantity <span className="text-blue-600">*</span>
           </label>
           <input
             type="text"
@@ -330,31 +327,31 @@ export function QuoteForm() {
             value={formData.quantity}
             onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
             placeholder="e.g. 500 pcs / 2,000 pcs"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
       </div>
 
       {/* Message / Specifications */}
       <div className="space-y-1.5">
-        <label className="text-xs font-mono text-aluminium-300 block">
+        <label className="text-xs font-mono text-slate-700 font-medium block">
           Technical Specifications / Order Details
         </label>
         <textarea
           rows={3}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          placeholder="Mention alloy requirements, skirt coating preferences, compression height, delivery port, or any reference codes..."
-          className="w-full px-3.5 py-2.5 rounded-xl bg-forged-surface border border-forged-border text-white text-sm placeholder:text-aluminium-500 focus:outline-none focus:border-electric transition-colors"
+          placeholder="Mention alloy requirements, skirt coating preferences, compression height, delivery port, or reference codes..."
+          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
         />
       </div>
 
       {/* File Attachment Upload */}
       <div className="space-y-1.5">
-        <label className="text-xs font-mono text-aluminium-300 block">
+        <label className="text-xs font-mono text-slate-700 font-medium block">
           Attach 2D/3D Drawing or Reference Piston Photo (Optional, Max 10MB)
         </label>
-        <div className="relative border-2 border-dashed border-forged-border hover:border-electric/50 rounded-xl p-4 bg-forged-surface/50 text-center transition-colors">
+        <div className="relative border-2 border-dashed border-slate-200 hover:border-blue-400 rounded-2xl p-4 bg-slate-50/60 text-center transition-colors">
           <input
             type="file"
             id="fileUpload"
@@ -363,10 +360,10 @@ export function QuoteForm() {
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           />
           <div className="flex flex-col items-center justify-center gap-1.5">
-            <UploadCloud className="w-6 h-6 text-electric" />
-            <div className="text-xs text-aluminium-300">
+            <UploadCloud className="w-6 h-6 text-blue-600" />
+            <div className="text-xs text-slate-600">
               {file ? (
-                <span className="text-emerald-400 font-semibold flex items-center gap-1">
+                <span className="text-emerald-600 font-semibold flex items-center gap-1">
                   <FileCheck className="w-4 h-4" />
                   {file.name} ({(file.size / (1024 * 1024)).toFixed(2)} MB)
                 </span>
@@ -376,13 +373,13 @@ export function QuoteForm() {
                 </span>
               )}
             </div>
-            <span className="text-[10px] font-mono text-aluminium-500">
+            <span className="text-[10px] font-mono text-slate-400">
               Accepted: PDF, PNG, JPG, DWG, DXF up to 10MB
             </span>
           </div>
         </div>
         {fileError && (
-          <p className="text-xs text-red-400 mt-1">{fileError}</p>
+          <p className="text-xs text-red-500 mt-1">{fileError}</p>
         )}
       </div>
 
@@ -390,7 +387,7 @@ export function QuoteForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full py-4 px-6 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-electric to-electric-hover hover:from-electric-light hover:to-electric shadow-glow-blue transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-4 px-6 rounded-xl text-base font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-btn-blue transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {submitting ? (
           <>
@@ -400,13 +397,13 @@ export function QuoteForm() {
         ) : (
           <>
             <Send className="w-5 h-5" />
-            <span>Submit Quotation Request</span>
+            <span>Submit Quotation Request to Jeet</span>
           </>
         )}
       </button>
 
-      <p className="text-center text-[11px] text-aluminium-500">
-        Strict privacy guaranteed. We sign NDAs for custom OEM CAD drawings.
+      <p className="text-center text-[11px] text-slate-500">
+        Strict privacy guaranteed. Non-disclosure agreements honored for CAD models.
       </p>
     </form>
   );

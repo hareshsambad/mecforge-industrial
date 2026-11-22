@@ -2,6 +2,7 @@ export interface SiteConfig {
   name: string;
   brandName: string;
   legalEntity: string;
+  contactPerson: string;
   tagline: string;
   subtitle: string;
   description: string;
@@ -20,6 +21,7 @@ export interface SiteConfig {
     capacityDisclaimer: string;
   };
   contact: {
+    contactPerson: string;
     email: string;
     phone: string;
     phoneDisplay: string;
@@ -56,11 +58,12 @@ export const siteConfig: SiteConfig = {
   name: "MECFORGE",
   brandName: "MECFORGE",
   legalEntity: "Krishna Industries",
+  contactPerson: "Jeet",
   tagline: "Precision in Every Piston.",
   subtitle:
     "Aluminium Piston Manufacturing from India — Built from the Ground Up for Diesel & Oil Engine Applications.",
   description:
-    "MECFORGE is the specialized export and B2B manufacturing brand of Krishna Industries, delivering 18+ years of dedicated aluminium melting, casting, and precision machining for diesel and oil engine pistons across India and global supply chains.",
+    "Backed by Krishna Industries's 18+ years of foundry casting and CNC machining heritage in India. We partner with international importers, wholesalers, engine rebuilders, and OEM distributors seeking consistent metallurgy, tight dimensional tolerances, and reliable bulk export delivery.",
   manufacturingOrigin: "India",
   foundedYear: 2006,
   experienceYears: 18,
@@ -77,13 +80,14 @@ export const siteConfig: SiteConfig = {
       "Production figures are indicative and subject to order specifications.",
   },
   contact: {
+    contactPerson: "Jeet",
     email: "info@mecforge.com",
-    phone: "+919876543210",
-    phoneDisplay: "+91 98765 43210",
-    whatsappNumber: "919876543210",
-    whatsappDisplay: "+91 98765 43210",
+    phone: "+919978711541",
+    phoneDisplay: "+91 99787 11541",
+    whatsappNumber: "919978711541",
+    whatsappDisplay: "+91 99787 11541",
     whatsappDefaultMessage:
-      "Hello MECFORGE, I am looking for a reliable piston manufacturing partner in India. I would like to request a quote.",
+      "Hello Jeet (MECFORGE), I am looking for a reliable piston manufacturing partner in India. I would like to request a quote.",
     address: {
       line1: "GIDC Industrial Area, Metoda / Shapar",
       city: "Rajkot",

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { ProductsCatalogueClient } from "@/components/products/ProductsCatalogueClient";
+import { WaveBackground } from "@/components/common/WaveBackground";
 import { Loader2 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -11,17 +12,19 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <div className="bg-forged-bg py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="py-12 lg:py-20 relative overflow-hidden">
+      <WaveBackground />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 z-10">
         {/* Header */}
         <div className="max-w-3xl space-y-3">
-          <span className="text-xs font-mono uppercase tracking-widest text-electric font-semibold">
+          <span className="text-xs font-mono uppercase tracking-widest text-blue-600 font-semibold">
             FACTORY CATALOGUE & CUSTOM TOOLING
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white font-heading tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-brand-navy font-heading tracking-tight">
             Aluminium Piston Models
           </h1>
-          <p className="text-base text-aluminium-300 leading-relaxed">
+          <p className="text-base text-slate-600 leading-relaxed">
             All models are produced from laboratory-checked aluminium alloys, 
             heat-treated, and turned to required piston-to-bore clearances. 
             All diameters and compression specs can be adjusted per buyer requirements.
@@ -31,7 +34,7 @@ export default function ProductsPage() {
         {/* Client Catalogue Component */}
         <Suspense
           fallback={
-            <div className="py-24 flex items-center justify-center text-electric">
+            <div className="py-24 flex items-center justify-center text-blue-600">
               <Loader2 className="w-8 h-8 animate-spin" />
             </div>
           }

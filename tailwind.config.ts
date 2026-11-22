@@ -9,27 +9,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        forged: {
-          bg: "#090C10",
-          surface: "#11161F",
-          card: "#161D29",
-          elevated: "#1C2433",
-          border: "rgba(255, 255, 255, 0.08)",
-          borderHover: "rgba(14, 165, 233, 0.4)",
+        brand: {
+          blue: "#2563EB",
+          "blue-hover": "#1D4ED8",
+          "blue-light": "#3B82F6",
+          "blue-subtle": "#EBF2FC",
+          emerald: "#10B981",
+          "emerald-hover": "#059669",
+          "emerald-subtle": "#E6F4F1",
+          navy: "#0F172A",
+          slate: "#1E293B",
+          body: "#334155",
+          muted: "#64748B",
+          border: "#E2E8F0",
+          cardTint: "#D5EBE6",
         },
-        electric: {
-          DEFAULT: "#0EA5E9",
-          hover: "#0284C7",
-          dark: "#0369A1",
-          light: "#38BDF8",
-          glow: "rgba(14, 165, 233, 0.25)",
-        },
-        aluminium: {
-          100: "#F1F5F9",
-          200: "#E2E8F0",
-          300: "#CBD5E1",
-          400: "#94A3B8",
-          500: "#64748B",
+        bg: {
+          ice: "#EBF2FC",
+          mint: "#E6F4F1",
+          soft: "#F8FAFC",
         },
       },
       fontFamily: {
@@ -38,14 +36,14 @@ const config: Config = {
         mono: ["var(--font-mono)", "monospace"],
       },
       backgroundImage: {
-        "grid-pattern": "linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)",
-        "blueprint-grid": "linear-gradient(to right, rgba(14, 165, 233, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(14, 165, 233, 0.08) 1px, transparent 1px)",
-        "metallic-gradient": "linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 50%, #94A3B8 100%)",
+        "theme-mesh":
+          "radial-gradient(at 0% 0%, #EBF2FC 0, transparent 65%), radial-gradient(at 100% 100%, #E6F4F1 0, transparent 65%), radial-gradient(at 50% 50%, #F8FAFC 0, transparent 100%)",
       },
       boxShadow: {
-        "glow-blue": "0 0 25px -5px rgba(14, 165, 233, 0.3)",
-        "glow-metallic": "0 0 25px -5px rgba(203, 213, 225, 0.15)",
-        "card-depth": "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
+        "soft-card": "0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.02)",
+        "hover-card": "0 20px 35px -8px rgba(15, 23, 42, 0.1), 0 8px 12px -3px rgba(15, 23, 42, 0.04)",
+        "btn-emerald": "0 8px 20px -4px rgba(16, 185, 129, 0.3)",
+        "btn-blue": "0 8px 20px -4px rgba(37, 99, 235, 0.25)",
       },
     },
   },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { siteConfig } from "@/data/siteConfig";
+import { WaveBackground } from "@/components/common/WaveBackground";
 import {
   Ruler,
   ShieldCheck,
@@ -66,18 +66,20 @@ export default function QualityPage() {
   ];
 
   return (
-    <div className="bg-forged-bg py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+    <div className="py-12 lg:py-20 relative overflow-hidden">
+      <WaveBackground />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 z-10">
         {/* Header */}
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forged-surface border border-emerald-500/30 text-xs font-mono text-emerald-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-mono text-emerald-700 shadow-xs">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
             <span>GROUNDED METROLOGY • ZERO FALSE CERTIFICATES</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white font-heading tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-brand-navy font-heading tracking-tight leading-tight">
             Quality Backed by Physical Measurement.
           </h1>
-          <p className="text-lg text-aluminium-300 leading-relaxed">
+          <p className="text-lg text-slate-600 leading-relaxed">
             In an industry where marketing claims often outpace reality, MECFORGE and 
             Krishna Industries stand on a simple foundation: calibrated measuring 
             instruments, careful machinists, and strict dimensional verification on every batch.
@@ -87,7 +89,7 @@ export default function QualityPage() {
         {/* Featured Inspection Image & Principles */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 relative">
-            <div className="relative rounded-2xl overflow-hidden bg-forged-card border border-forged-border shadow-2xl">
+            <div className="relative rounded-3xl overflow-hidden bg-white border border-slate-200/90 shadow-soft-card">
               <div className="relative aspect-[4/3] w-full">
                 <Image
                   src="/images/quality-vernier.jpg"
@@ -96,17 +98,17 @@ export default function QualityPage() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-4 bg-forged-surface border-t border-forged-border flex items-center justify-between text-xs font-mono">
-                <span className="text-white font-semibold">
+              <div className="p-4 bg-brand-cardTint border-t border-teal-200/40 flex items-center justify-between text-xs font-mono">
+                <span className="text-slate-900 font-bold">
                   Vernier Caliper & Drawing Verification
                 </span>
-                <span className="text-emerald-400">Physical Inspection</span>
+                <span className="text-teal-800 font-semibold">Physical Inspection</span>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-6 space-y-6 text-aluminium-300 leading-relaxed text-sm sm:text-base">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white font-heading">
+          <div className="lg:col-span-6 space-y-6 text-slate-600 leading-relaxed text-sm sm:text-base">
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy font-heading">
               Our Honest Quality Commitment
             </h2>
             <p>
@@ -115,21 +117,21 @@ export default function QualityPage() {
             </p>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
                   <strong>Dedicated Metrology Tools:</strong> Every CNC workstation is equipped 
                   with calibrated outside micrometers, blade feeler gauges, and bore gauges.
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
                   <strong>First-Piece & In-Process Audit:</strong> Machinists inspect the first 
                   machined blank after each tool change, followed by random sampling throughout the run.
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
                   <strong>Customer-Specified Inspection Sheets:</strong> If your company requires 
                   batch dimensional reports for outer diameter, pin bore, and weight, our team records 
@@ -138,8 +140,8 @@ export default function QualityPage() {
               </li>
             </ul>
 
-            <div className="p-4 rounded-xl bg-forged-surface border border-forged-border text-xs text-aluminium-400 flex items-center gap-3">
-              <ShieldAlert className="w-5 h-5 text-electric shrink-0" />
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 text-xs text-slate-600 flex items-center gap-3 shadow-xs">
+              <ShieldAlert className="w-5 h-5 text-blue-600 shrink-0" />
               <span>
                 Alloy chemical composition and dimensional certificates are provided based 
                 on customer agreement and verified test bars.
@@ -151,10 +153,10 @@ export default function QualityPage() {
         {/* 6 Inspection Checks Grid */}
         <div className="space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-mono uppercase text-electric font-semibold tracking-wider">
+            <span className="text-xs font-mono uppercase text-blue-600 font-semibold tracking-wider">
               INSPECTION PROTOCOL
             </span>
-            <h2 className="text-3xl font-bold text-white font-heading">
+            <h2 className="text-3xl font-bold text-brand-navy font-heading">
               Key Dimensional & Material Checks
             </h2>
           </div>
@@ -165,32 +167,32 @@ export default function QualityPage() {
               return (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl bg-forged-card border border-forged-border/80 hover:border-emerald-500/30 transition-all duration-300 flex flex-col justify-between space-y-4"
+                  className="p-6 rounded-3xl bg-white border border-slate-200/90 hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between space-y-4 shadow-soft-card hover:shadow-hover-card"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+                      <span className="text-xs font-mono font-bold text-emerald-700 px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-200">
                         CHECK {item.num}
                       </span>
-                      <div className="p-2 rounded-lg bg-forged-surface text-emerald-400 border border-white/5">
+                      <div className="p-2 rounded-xl bg-slate-50 text-emerald-600 border border-slate-200">
                         <Icon className="w-4 h-4" />
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-white font-heading">
+                    <h3 className="text-lg font-bold text-brand-navy font-heading">
                       {item.title}
                     </h3>
 
-                    <p className="text-xs text-aluminium-300 leading-relaxed">
+                    <p className="text-xs text-slate-600 leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-forged-border">
-                    <span className="text-[11px] font-mono text-aluminium-400 block">
+                  <div className="pt-3 border-t border-slate-100">
+                    <span className="text-[11px] font-mono text-slate-500 block">
                       Instrument Used:
                     </span>
-                    <span className="text-xs font-mono text-electric font-semibold block mt-0.5">
+                    <span className="text-xs font-mono text-blue-600 font-semibold block mt-0.5">
                       {item.instrument}
                     </span>
                   </div>
@@ -200,9 +202,9 @@ export default function QualityPage() {
           </div>
         </div>
 
-        {/* Two Additional Visual Evidence Cards */}
+        {/* Two Visual Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="rounded-2xl bg-forged-card border border-forged-border overflow-hidden">
+          <div className="rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-soft-card">
             <div className="relative aspect-[16/10] w-full">
               <Image
                 src="/images/quality-cmm-probe.jpg"
@@ -212,17 +214,17 @@ export default function QualityPage() {
               />
             </div>
             <div className="p-6 space-y-2">
-              <h3 className="text-lg font-bold text-white font-heading">
+              <h3 className="text-lg font-bold text-brand-navy font-heading">
                 Crown Swirl & Valve Relief Profiling
               </h3>
-              <p className="text-xs text-aluminium-300 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Checking direct-injection combustion bowl depths and valve clearances 
                 to ensure correct compression ratios across single-cylinder and multi-cylinder engines.
               </p>
             </div>
           </div>
 
-          <div className="rounded-2xl bg-forged-card border border-forged-border overflow-hidden">
+          <div className="rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-soft-card">
             <div className="relative aspect-[16/10] w-full">
               <Image
                 src="/images/quality-micrometer.jpg"
@@ -232,10 +234,10 @@ export default function QualityPage() {
               />
             </div>
             <div className="p-6 space-y-2">
-              <h3 className="text-lg font-bold text-white font-heading">
+              <h3 className="text-lg font-bold text-brand-navy font-heading">
                 Gauge Point Diameter & Ovality Tolerance
               </h3>
-              <p className="text-xs text-aluminium-300 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Measuring skirt ovality at calibrated gauge heights to guarantee 
                 the specified clearance in the engine cylinder liner under operational thermal loads.
               </p>
@@ -244,17 +246,17 @@ export default function QualityPage() {
         </div>
 
         {/* CTA */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-forged-surface border border-forged-border text-center max-w-3xl mx-auto space-y-4">
-          <h3 className="text-2xl font-bold text-white font-heading">
+        <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200 text-center max-w-3xl mx-auto space-y-4 shadow-soft-card">
+          <h3 className="text-2xl font-bold text-brand-navy font-heading">
             Request sample inspection data for your order
           </h3>
-          <p className="text-sm text-aluminium-300">
-            Discuss your required tolerance band or quality parameters with our engineers.
+          <p className="text-sm text-slate-600">
+            Discuss your required tolerance band or quality parameters with Jeet.
           </p>
           <div className="pt-2">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold text-white bg-electric hover:bg-electric-hover shadow-glow-blue transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-btn-blue transition-all"
             >
               <span>Connect with Quality Engineering</span>
               <ArrowRight className="w-4 h-4" />

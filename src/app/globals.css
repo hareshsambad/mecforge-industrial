@@ -10,53 +10,37 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #090C10;
-  color: #F8FAFC;
+  background-color: #F8FAFC;
+  color: #1E293B;
 }
 
 body {
-  background-color: #090C10;
-  color: #F8FAFC;
+  background: radial-gradient(at 0% 0%, #EBF2FC 0, transparent 60%),
+              radial-gradient(at 100% 100%, #E6F4F1 0, transparent 60%),
+              #F8FAFC;
+  background-attachment: fixed;
+  color: #1E293B;
   font-family: var(--font-inter);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom modern industrial scrollbar */
+/* Custom sleek light scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #090C10;
+  background: #EBF2FC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1C2433;
+  background: #CBD5E1;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0EA5E9;
-}
-
-/* Metallic sheen animation */
-@keyframes sheen {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.metallic-text {
-  background: linear-gradient(90deg, #94a3b8 0%, #ffffff 50%, #94a3b8 100%);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
+  background: #2563EB;
 }
