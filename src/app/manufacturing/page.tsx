@@ -237,6 +237,17 @@ export default function ManufacturingPage() {
             <div className="p-8 rounded-3xl bg-gradient-to-b from-blue-50/50 to-white border-2 border-blue-500/70 space-y-4 shadow-soft-card">
               <span className="text-2xl font-black font-mono text-blue-600">02</span>
               <h3 className="text-xl font-bold text-brand-navy">Drawing-Based</h3>
+              <div className="relative rounded-2xl overflow-hidden border border-blue-200 aspect-[16/10] bg-[#0A192F] shadow-sm my-2">
+                <Image
+                  src="/images/cad-blueprint-glow.png"
+                  alt="2D CAD Technical Blueprint of Piston"
+                  fill
+                  className="object-contain p-2 hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-2 right-2 px-2.5 py-1 rounded-md bg-slate-900/85 text-[10px] font-mono text-sky-300 border border-sky-400/30">
+                  2D CAD Blueprint
+                </div>
+              </div>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Provide 2D PDF / DWG prints or 3D models. We engineer custom casting dies, verify compression heights, and cut dedicated CNC toolpaths.
               </p>
