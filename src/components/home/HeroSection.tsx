@@ -1,128 +1,192 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Layers, FileText, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Layers, Pause, Play } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
-import { WaveBackground } from "@/components/common/WaveBackground";
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [shouldShowVideo, setShouldShowVideo] = useState(false);
+
+  useEffect(() => {
+    // Check prefers-reduced-motion and Save-Data
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const connection = (navigator as unknown as { connection?: { saveData?: boolean } })
+      .connection;
+    const saveData = connection?.saveData ?? false;
+
+    // Also skip video on very small screens (< 640px)
+    const isSmallScreen = window.innerWidth < 640;
+
+    setShouldShowVideo(!prefersReduced && !saveData && !isSmallScreen);
+  }, []);
+
+  const togglePlayPause = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const { heroVideo } = siteConfig;
+
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-12 lg:py-20">
-      {/* Background Flowing Curved Contour / Wave Lines */}
-      <WaveBackground />
+    <section
+      className="relative w-full overflow-hidden flex items-end justify-center"
+      style={{
+        height: "min(calc(100svh - var(--header-height)), 820px)",
+        minHeight: "560px",
+      }}
+    >
+      {/* Video / Poster background */}
+      <div className="absolute inset-0 z-0">
+        {/* Poster image (always present for LCP and fallback) */}
+        <Image
+          src={heroVideo.poster}
+          alt="MECFORGE aluminium piston foundry and manufacturing"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-          {/* Left Column: Text & CTAs */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Origin & Experience Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/85 border border-slate-200/90 text-xs font-mono text-slate-700 shadow-xs backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-blue-600" />
-              <span className="tracking-wider uppercase font-semibold">
-                18+ YEARS OF MANUFACTURING EXPERIENCE • INDIA
-              </span>
-            </div>
+        {/* Video layer */}
+        {shouldShowVideo && (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroVideo.poster}
+            onLoadedData={() => setVideoLoaded(true)}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              videoLoaded ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <source src={heroVideo.webm} type="video/webm" />
+            <source src={heroVideo.mp4} type="video/mp4" />
+          </video>
+        )}
 
-            {/* Main Headline */}
-            <div className="space-y-3">
-              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-brand-navy tracking-tight leading-[1.1] font-heading">
-                Precision in <br />
-                <span className="text-slate-800">Every Piston.</span>
-              </h1>
-              <p className="text-lg sm:text-xl text-brand-slate font-medium leading-relaxed max-w-2xl">
-                {siteConfig.subtitle}
-              </p>
-            </div>
+        {/* Ken Burns effect for poster-only mode */}
+        {!shouldShowVideo && (
+          <div
+            className="absolute inset-0 animate-slow-zoom"
+            style={{
+              backgroundImage: `url(${heroVideo.poster})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        )}
+      </div>
 
-            {/* Introduction Copy */}
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-              Backed by <strong className="text-slate-900 font-semibold">{siteConfig.legalEntity}&apos;s</strong>{" "}
-              18+ years of foundry casting and CNC machining heritage in India. 
-              We partner with international importers, wholesalers, engine rebuilders, 
-              and OEM distributors seeking consistent metallurgy, tight dimensional tolerances, 
-              and reliable bulk export delivery.
-            </p>
+      {/* Dark gradient overlay */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.50) 40%, rgba(0,0,0,0.80) 100%)",
+        }}
+      />
 
-            {/* 3 Capability Checkmarks */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-1">
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                <span>100% In-House Foundry</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                <span>CAD / 2D Drawing-Based</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                <span>Physical Sample Matching</span>
-              </div>
-            </div>
+      {/* Warm vignette */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 50%, rgba(30,10,0,0.3) 100%)",
+        }}
+      />
 
-            {/* Dual CTAs (Matching the reference buttons exactly!) */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-3">
-              {/* Primary Green CTA */}
-              <Link
-                href="/products"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-sm sm:text-base font-semibold text-white bg-brand-emerald hover:bg-brand-emerald-hover rounded-xl shadow-btn-emerald transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <Layers className="w-4 h-4" />
-                <span>Explore Products</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+      {/* Content (positioned in lower half) */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          {/* H1 */}
+          <h1
+            className="font-display font-extrabold uppercase text-white tracking-tight leading-[1.05]"
+            style={{ fontSize: "clamp(2.25rem, 6vw, 4.5rem)" }}
+          >
+            Precision Aluminium
+            <br />
+            Piston Manufacturing
+          </h1>
 
-              {/* Secondary Blue-Bordered CTA */}
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-blue-700 bg-white/90 hover:bg-blue-50/70 border-2 border-blue-600/90 rounded-xl shadow-xs transition-all duration-300"
-              >
-                <FileText className="w-4 h-4 text-blue-600" />
-                <span>Request a Quote</span>
-              </Link>
-            </div>
+          {/* Subtext */}
+          <p className="text-gray-200 text-base sm:text-lg lg:text-xl max-w-[760px] mx-auto leading-relaxed">
+            Gravity die-cast aluminium pistons for diesel and oil engines
+            — melting, casting, CNC machining and inspection, all under
+            one roof in Rajkot, India.
+          </p>
+
+          {/* Two buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm sm:text-base font-bold uppercase tracking-wider text-white bg-brand-accent hover:bg-brand-accent-hover rounded shadow-btn-accent transition-all duration-300 focus-ring"
+            >
+              <span>Request a Quote</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <Link
+              href="/products"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm sm:text-base font-bold uppercase tracking-wider text-white border-2 border-white/80 hover:bg-white/10 rounded transition-all duration-300 focus-ring"
+            >
+              <Layers className="w-4 h-4" />
+              <span>Explore Products</span>
+            </Link>
           </div>
 
-          {/* Right Showcase Card (Exact match to reference image card) */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-lg lg:max-w-none">
-              <div className="rounded-3xl overflow-hidden bg-white border border-white/80 shadow-2xl shadow-slate-300/50 transition-transform duration-500 hover:scale-[1.01]">
-                {/* Photo Container */}
-                <div className="relative aspect-[16/11] w-full bg-slate-900">
-                  <Image
-                    src="/images/hero-piston.jpg"
-                    alt="Precision engineered aluminium diesel pistons and connecting rod assembly"
-                    fill
-                    priority
-                    className="object-cover object-center"
-                  />
-                </div>
-
-                {/* Cool-Tinted Footer Bar (Matches exact mint/sage-tinted bar from image) */}
-                <div className="p-4 sm:p-5 bg-brand-cardTint border-t border-teal-200/40 flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <span className="text-[10px] sm:text-[11px] font-mono text-teal-800 uppercase tracking-wider block font-semibold">
-                      METALLURGY & DIE CASTING
-                    </span>
-                    <span className="text-xs sm:text-sm font-bold text-slate-900 block">
-                      Gravity Die Cast Aluminium Pistons
-                    </span>
-                  </div>
-                  <div className="text-right space-y-0.5">
-                    <span className="text-xs font-mono text-slate-800 flex items-center gap-1 justify-end font-semibold">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-700" />
-                      In-House CNC
-                    </span>
-                    <span className="text-[11px] text-slate-600 block">
-                      Standard & Custom Runs
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Tagline */}
+          <p className="font-script text-lg sm:text-xl lg:text-2xl text-white/80 italic pt-2">
+            {siteConfig.tagline}
+          </p>
         </div>
       </div>
+
+      {/* Pause/Play button */}
+      {shouldShowVideo && (
+        <button
+          onClick={togglePlayPause}
+          type="button"
+          aria-label={isPlaying ? "Pause background video" : "Play background video"}
+          className="absolute bottom-4 right-4 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white/80 hover:text-white transition-colors focus-ring"
+        >
+          {isPlaying ? (
+            <Pause className="w-4 h-4" />
+          ) : (
+            <Play className="w-4 h-4" />
+          )}
+        </button>
+      )}
+
+      <style jsx>{`
+        @keyframes slow-zoom {
+          0% {
+            transform: scale(1);
+          }
+          100% {
+            transform: scale(1.08);
+          }
+        }
+        .animate-slow-zoom {
+          animation: slow-zoom 20s ease-in-out infinite alternate;
+        }
+      `}</style>
     </section>
   );
 }
