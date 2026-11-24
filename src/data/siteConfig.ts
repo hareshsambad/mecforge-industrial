@@ -38,7 +38,14 @@ export interface SiteConfig {
     workingHours: string;
     businessDays: string;
   };
-  navLinks: { name: string; href: string }[];
+  navLinks: { name: string; href: string; children?: { name: string; href: string }[] }[];
+  heroVideo: {
+    webm: string;
+    mp4: string;
+    poster: string;
+    mobileWebm?: string;
+    mobileMp4?: string;
+  };
   manufacturingModes: {
     id: string;
     number: string;
@@ -101,11 +108,32 @@ export const siteConfig: SiteConfig = {
   navLinks: [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
-    { name: "Products", href: "/products" },
+    {
+      name: "Products",
+      href: "/products",
+      children: [
+        { name: "Diesel Engine Pistons", href: "/products?category=diesel" },
+        { name: "Oil & Agricultural Pistons", href: "/products?category=oil" },
+        { name: "Drawing-Based Pistons", href: "/products?category=custom" },
+      ],
+    },
     { name: "Manufacturing", href: "/manufacturing" },
     { name: "Quality", href: "/quality" },
     { name: "Contact & Quote", href: "/contact" },
   ],
+
+  // ── VIDEO CONFIG ─────────────────────────────────────────
+  // Change these paths to swap the hero video in one place.
+  // Priority: real plant footage > royalty-free stock > poster fallback.
+  // Files go in /public/videos/ and /public/images/.
+  heroVideo: {
+    webm: "/videos/foundry-hero.webm",
+    mp4: "/videos/foundry-hero.mp4",
+    poster: "/images/foundry-poster.jpg",
+    mobileWebm: "/videos/foundry-hero-720p.webm",
+    mobileMp4: "/videos/foundry-hero-720p.mp4",
+  },
+
   manufacturingModes: [
     {
       id: "existing-models",
