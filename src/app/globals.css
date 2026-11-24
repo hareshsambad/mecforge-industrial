@@ -3,7 +3,20 @@
 @tailwind utilities;
 
 :root {
+  /* Foundry design system tokens */
+  --color-accent: #E8590C;
+  --color-accent-hover: #D14E0A;
+  --color-accent-light: #FFF4EE;
+  --color-charcoal: #1A1A1A;
+  --color-charcoal-deep: #111111;
+
+  /* Header */
+  --header-height: 80px;
+
+  /* Font stacks (populated by next/font) */
   --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-script: 'Playfair Display', 'Georgia', serif;
   --font-space: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -26,7 +39,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom sleek light scrollbar */
+
+/* Custom sleek scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -42,5 +56,11 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563EB;
+  background: var(--color-accent);
+}
+
+/* Focus ring utility */
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  --tw-ring-color: var(--color-accent);
 }
